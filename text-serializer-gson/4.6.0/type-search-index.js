@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes","u":"allclasses-index.html"},{"p":"net.kyori.adventure.text.serializer.gson","l":"GsonComponentSerializer.Builder"},{"p":"net.kyori.adventure.text.serializer.gson","l":"GsonComponentSerializer"},{"p":"net.kyori.adventure.text.serializer.gson","l":"LegacyHoverEventSerializer"}];updateSearchResults();
