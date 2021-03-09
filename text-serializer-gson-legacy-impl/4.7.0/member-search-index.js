@@ -1,0 +1,1 @@
+memberSearchIndex = [{"p":"net.kyori.adventure.text.serializer.gson.legacyimpl","c":"NBTLegacyHoverEventSerializer","l":"get()"}];updateSearchResults();
