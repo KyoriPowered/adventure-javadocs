@@ -5,13 +5,14 @@ from collections.abc import Sequence
 import jinja2
 import os.path
 from pathlib import Path
+from semver import VersionInfo
 import shutil
 import sys
 from typing import NamedTuple
 
 class ModuleVersions(NamedTuple):
   name: str
-  versions: list[str]
+  versions: list[VersionInfo]
 
 
 def _generate_versions(jd_root: Path) -> list[ModuleVersions]: # module -> list[version]
@@ -25,7 +26,8 @@ def _generate_versions(jd_root: Path) -> list[ModuleVersions]: # module -> list[
     if dirname.startswith(".") or dirname.startswith("_") or not module.is_dir():
       continue
 
-    versions = [x.name for x in module.iterdir() if x.is_dir and not x.name.startswith(".")]
+    versions = [VersionInfo.parse(x.name) for x in module.iterdir() if x.is_dir and not x.name.startswith(".")]
+    versions.sort()
     result.append(ModuleVersions(dirname, versions))
 
   return result
@@ -77,6 +79,9 @@ def _do_generate(dest: Path, jd_root: Path, template_root: Path, static_root: Pa
     module_out = dest / module.name
     print(f"Copying {module.name} to {module_out}")
     shutil.copytree(jd_root / module.name, module_out, symlinks=True)
+    print(f"Generating 'latest' symlink for {module.name}")
+    (module_out / 'latest/').symlink_to(Path(str(max(module.versions))))
+
 
   print(f"Generated successfully to {dest}")
 
