@@ -46,7 +46,8 @@ def _do_generate(dest: Path, jd_root: Path, template_root: Path, static_root: Pa
 
   # Setup, generate metadata
   module_versions = _generate_versions(jd_root)
-  shutil.rmtree(dest)
+  if dest.exists():
+    shutil.rmtree(dest)
   dest.mkdir(exist_ok=True)
 
   # Generate templates
