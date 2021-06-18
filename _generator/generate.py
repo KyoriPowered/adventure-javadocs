@@ -75,8 +75,8 @@ def _do_generate(dest: Path, jd_root: Path, template_root: Path, static_root: Pa
   # link JD directories into the output dir
   for module in module_versions:
     module_out = dest / module.name
-    print(f"Linking {module} to {module_out}")
-    module_out.symlink_to(os.path.relpath(jd_root.absolute() / module.name, start=dest), target_is_directory=True)
+    print(f"Copying {module.name} to {module_out}")
+    shutil.copytree(jd_root / module.name, module_out, symlinks=True)
 
   print(f"Generated successfully to {dest}")
 
