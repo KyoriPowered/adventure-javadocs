@@ -12,7 +12,7 @@
   <div>
     <div class="header">{{ module.name }}</div>
     <ul>
-      {% for version in module.versions %}
+      {% for version in module.versions | reverse %}
       <li><a href="/{{ module.name }}/{{ version }}/">{{ version }}</a></li>
       {% endfor %}
     </ul>
