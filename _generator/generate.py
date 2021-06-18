@@ -2,17 +2,23 @@
 
 import argparse
 from collections.abc import Sequence
-import liquid
+import jinja2
 import os.path
 from pathlib import Path
 import shutil
 import sys
+from typing import NamedTuple
 
-def _generate_versions(jd_root: Path) -> dict[str, list[str]]: # module -> list[version]
+class ModuleVersions(NamedTuple):
+  name: str
+  versions: list[str]
+
+
+def _generate_versions(jd_root: Path) -> list[ModuleVersions]: # module -> list[version]
   """
   Generate a mapping of adventure module to module version.
   """
-  result = {}
+  result = []
 
   for module in jd_root.iterdir():
     dirname = module.name
@@ -20,7 +26,7 @@ def _generate_versions(jd_root: Path) -> dict[str, list[str]]: # module -> list[
       continue
 
     versions = [x.name for x in module.iterdir() if x.is_dir and not x.name.startswith(".")]
-    result[dirname] = versions
+    result.append(ModuleVersions(dirname, versions))
 
   return result
 
@@ -44,32 +50,32 @@ def _do_generate(dest: Path, jd_root: Path, template_root: Path, static_root: Pa
   dest.mkdir(exist_ok=True)
 
   # Generate templates
-  tmpl_env = liquid.Environment(
-    loader=liquid.FileSystemLoader(template_root),
-    globals={
-      "module_versions": module_versions
-    },
-    undefined=liquid.StrictUndefined
+  tmpl_env = jinja2.Environment(
+    loader=jinja2.FileSystemLoader(template_root),
+    undefined=jinja2.StrictUndefined,
+    autoescape=True,
+    keep_trailing_newline=True
   )
+  tmpl_env.globals["module_versions"] = module_versions
 
   for tmpl in template_root.glob('**/*'):
-    tmpl_out = dest / tmpl
+    tmpl_out = dest / tmpl.relative_to(template_root)
     print(f"Writing {tmpl} to {tmpl_out}")
-    template = tmpl_env.get_template(str(tmpl))
+    template = tmpl_env.get_template(str(tmpl.relative_to(template_root)))
     with tmpl_out.open(mode = 'wt') as fp:
       fp.write(template.render())
 
   # Copy static content
   for static in static_root.glob('**/*'):
-    static_out = dest / static
+    static_out = dest / static.relative_to(static_root)
     print(f"Writing {static} to {static_out}")
     shutil.copy2(static, static_out)
 
   # link JD directories into the output dir
-  for module in module_versions.keys():
-    module_out = dest / module
+  for module in module_versions:
+    module_out = dest / module.name
     print(f"Linking {module} to {module_out}")
-    module_out.symlink_to(os.path.relpath(jd_root.absolute() / module, start=module_out), target_is_directory=True)
+    module_out.symlink_to(os.path.relpath(jd_root.absolute() / module.name, start=dest), target_is_directory=True)
 
   print(f"Generated successfully to {dest}")
 

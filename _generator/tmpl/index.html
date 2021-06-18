@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>Adventure Javadocs</title>
+  <link rel="stylesheet" type="text/css" href="index.css">
+</head>
+<body>
+<div class="title">Adventure Javadocs</div>
+<div id="listContainer">
+  {% for module in module_versions %}
+  <div>
+    <div class="header">{{ module.name }}</div>
+    <ul>
+      {% for version in module.versions %}
+      <li><a href="/{{ module.name }}/{{ version }}/">{{ version }}</a></li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endfor %}
+</div>
+</body>
+</html>
