@@ -77,8 +77,9 @@ def _do_generate(dest: Path, jd_root: Path, template_root: Path, static_root: Pa
     module_out = dest / module.name
     print(f"Copying {module.name} to {module_out}")
     shutil.copytree(jd_root / module.name, module_out, symlinks=True)
-    print(f"Generating 'latest' symlink for {module.name}")
-    (module_out / 'latest/').symlink_to(Path(str(max(module.versions))))
+    print(f"Copying {max(module.versions)} to 'latest' endpoint for {module.name}")
+    shutil.copytree(jd_root / module.name / str(max(module.versions)), module_out / 'latest/', symlinks=True)
+    # (module_out / 'latest/').symlink_to(Path(str(max(module.versions))))
 
 
   print(f"Generated successfully to {dest}")
