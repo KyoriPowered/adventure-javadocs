@@ -1,21 +1,19 @@
 #!/usr/bin/env python
 
 import argparse
-from collections.abc import Sequence
 import jinja2
-import os.path
 from pathlib import Path
 from semver import VersionInfo
 import shutil
 import sys
-from typing import NamedTuple
+from typing import NamedTuple, List, Sequence
 
 class ModuleVersions(NamedTuple):
   name: str
-  versions: list[VersionInfo]
+  versions: List[VersionInfo]
 
 
-def _generate_versions(jd_root: Path) -> list[ModuleVersions]: # module -> list[version]
+def _generate_versions(jd_root: Path) -> List[ModuleVersions]: # module -> list[version]
   """
   Generate a mapping of adventure module to module version.
   """
