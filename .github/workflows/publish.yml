@@ -3,33 +3,51 @@ on: ["pull_request", "push"]
 
 env:
   DEST_DIR: _out
-  PYTHON_VERSION: 3.9
+  PYTHON_VERSION: "3.10"
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
 
 jobs:
   build:
     # Only run on PRs if the source branch is on someone else's repo
     if: "${{ github.event_name != 'pull_request' || github.repository != github.event.pull_request.head.repo.full_name }}"
-    runs-on: "ubuntu-20.04"
+    runs-on: "ubuntu-latest"
     steps:
       - name: "checkout repository"
-        uses: "actions/checkout@v2"
+        uses: "actions/checkout@v3"
       - name: "setup python ${{ env.PYTHON_VERSION }}"
-        uses: "actions/setup-python@v2"
+        uses: "actions/setup-python@v4"
         with:
           python-version: "${{ env.PYTHON_VERSION }}"
       - name: "install dependencies"
         run: |
-          python -m pip install --upgrade pip
-          python -m pip install -r _generator/requirements.txt
+          pip install poetry
+          pushd _generator
+          poetry install
       - name: "generate site"
         run: |
-          python _generator/generate.py $DEST_DIR
+          pushd _generator
+          poetry run generate-jd ../$DEST_DIR --metadata ../metadata.yaml --jd-root ..
       - name: "publish"
         if: "${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}"
-        uses: "JamesIves/github-pages-deploy-action@4.1.4"
+        uses: "actions/upload-pages-artifact@v1"
         with:
-          branch: "gh-pages"
-          folder: "${{ env.DEST_DIR }}"
-          single-commit: true
+          path: "${{ env.DEST_DIR }}"
+  deploy:
+    if: "${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}"
+    needs: "build"
+    runs-on: "ubuntu-latest"
 
+    permissions:
+      pages: "write"
+      id-token: "write"
+    environment:
+      name: "github-pages"
+      url: "${{ steps.deployment.output.page_url }}"
 
+    steps:
+      - name: "Deploy to GitHub pages"
+        id: "deployment"
+        uses: "actions/deploy-pages@v1"
