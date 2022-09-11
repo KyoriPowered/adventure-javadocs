@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"net.kyori.adventure.platform.bungeecord","l":"BungeeAudiences.Builder"},{"p":"net.kyori.adventure.platform.bungeecord","l":"BungeeAudiences"}];updateSearchResults();

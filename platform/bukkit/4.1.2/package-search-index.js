@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"net.kyori.adventure.platform.bukkit"},{"l":"net.kyori.adventure.text.serializer.craftbukkit"}];updateSearchResults();

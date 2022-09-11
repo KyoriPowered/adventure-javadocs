@@ -2,4 +2,9 @@ name: Adventure Javadoc
 
 components: {}
 
-groups: {}
+groups:
+  platform:
+    name: "adventure-platform"
+    description: "Legacy platform implementations for Adventure"
+    url: "https://github.com/KyoriPowered/adventure-platform"
+    from-directory: true
