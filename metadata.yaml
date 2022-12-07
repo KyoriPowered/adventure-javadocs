@@ -1,10 +1,13 @@
 name: Adventure Javadoc
 
-components: {}
+components:
+  fabric:
+    name: "adventure-platform-fabric"
+    url: "https://github.com/KyoriPowered/adventure-platform-fabric"
 
 groups:
   platform:
     name: "adventure-platform"
-    description: "Legacy platform implementations for Adventure"
+    description: "Platform implementations for Adventure"
     url: "https://github.com/KyoriPowered/adventure-platform"
     from-directory: true
