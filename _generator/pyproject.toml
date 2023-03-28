@@ -15,6 +15,12 @@ semver = ">=2.13.0,<3.0.0"
 [tool.poetry.scripts]
 "generate-jd" = 'jdgenerator.generate:main'
 
+[[tool.poetry.source]]
+name = "kyori"
+url = "https://repo.kyori.net/repository/pip-internal/simple/"
+default = true
+secondary = false
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
