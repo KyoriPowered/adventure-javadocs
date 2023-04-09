@@ -1,0 +1,5 @@
+net.kyori.adventure.text.minimessage
+net.kyori.adventure.text.minimessage.tag
+net.kyori.adventure.text.minimessage.tag.resolver
+net.kyori.adventure.text.minimessage.tag.standard
+net.kyori.adventure.text.minimessage.tree
