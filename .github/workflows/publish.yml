@@ -32,7 +32,7 @@ jobs:
           poetry run generate-jd ../$DEST_DIR --metadata ../metadata.yaml --jd-root ..
       - name: "publish"
         if: "${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}"
-        uses: "actions/upload-pages-artifact@v1"
+        uses: "actions/upload-pages-artifact@v2"
         with:
           path: "${{ env.DEST_DIR }}"
   deploy:
@@ -50,4 +50,4 @@ jobs:
     steps:
       - name: "Deploy to GitHub pages"
         id: "deployment"
-        uses: "actions/deploy-pages@v1"
+        uses: "actions/deploy-pages@v2"
