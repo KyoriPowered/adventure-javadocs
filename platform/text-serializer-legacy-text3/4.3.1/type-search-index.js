@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes","url":"allclasses-index.html"},{"p":"net.kyori.adventure.text.serializer.legacytext3","l":"LegacyText3ComponentSerializer"}]
