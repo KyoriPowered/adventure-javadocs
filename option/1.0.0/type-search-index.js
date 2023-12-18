@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"net.kyori.option","l":"OptionState.Builder"},{"p":"net.kyori.option","l":"Option"},{"p":"net.kyori.option","l":"OptionState"},{"p":"net.kyori.option","l":"OptionState.Versioned"},{"p":"net.kyori.option","l":"OptionState.VersionedBuilder"}];updateSearchResults();

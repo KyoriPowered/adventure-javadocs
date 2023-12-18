@@ -4,6 +4,9 @@ components:
   fabric:
     name: "adventure-platform-fabric"
     url: "https://github.com/KyoriPowered/adventure-platform-fabric"
+  option:
+    name: "option"
+    url: "https://option.kyori.net/"
 
 groups:
   platform:
