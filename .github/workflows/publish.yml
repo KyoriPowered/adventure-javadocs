@@ -18,7 +18,7 @@ jobs:
       - name: "checkout repository"
         uses: "actions/checkout@v4"
       - name: "setup python ${{ env.PYTHON_VERSION }}"
-        uses: "actions/setup-python@v4"
+        uses: "actions/setup-python@v5"
         with:
           python-version: "${{ env.PYTHON_VERSION }}"
       - name: "install dependencies"
@@ -32,7 +32,7 @@ jobs:
           poetry run generate-jd ../$DEST_DIR --metadata ../metadata.yaml --jd-root ..
       - name: "publish"
         if: "${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}"
-        uses: "actions/upload-pages-artifact@v2"
+        uses: "actions/upload-pages-artifact@v3"
         with:
           path: "${{ env.DEST_DIR }}"
   deploy:
@@ -50,4 +50,4 @@ jobs:
     steps:
       - name: "Deploy to GitHub pages"
         id: "deployment"
-        uses: "actions/deploy-pages@v2"
+        uses: "actions/deploy-pages@v4"
