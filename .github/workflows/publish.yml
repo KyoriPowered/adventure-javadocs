@@ -28,7 +28,7 @@ jobs:
           poetry install
       - name: "generate site"
         run: |
-          pushd _genera tor
+          pushd _generator
           poetry run generate-jd ../$DEST_DIR --metadata ../metadata.yaml --jd-root ..
       - name: "publish"
         if: "${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}"
