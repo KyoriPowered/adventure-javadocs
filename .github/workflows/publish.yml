@@ -3,7 +3,7 @@ on: ["pull_request", "push"]
 
 env:
   DEST_DIR: _out
-  PYTHON_VERSION: "3.10"
+  PYTHON_VERSION: "3.12"
 
 concurrency:
   group: "${{ github.workflow }}-${{ github.event.number || github.ref }}"
@@ -23,12 +23,12 @@ jobs:
           python-version: "${{ env.PYTHON_VERSION }}"
       - name: "install dependencies"
         run: |
-          pip install poetry
+          pip install -U poetry
           pushd _generator
           poetry install
       - name: "generate site"
         run: |
-          pushd _generator
+          pushd _genera tor
           poetry run generate-jd ../$DEST_DIR --metadata ../metadata.yaml --jd-root ..
       - name: "publish"
         if: "${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}"
