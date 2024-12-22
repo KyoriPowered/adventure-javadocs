@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"net.kyori.adventure.text.serializer.gson.legacyimpl","l":"NBTLegacyHoverEventSerializer"}];updateSearchResults();

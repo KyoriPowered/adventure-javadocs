@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"net.kyori.adventure.text.serializer.gson"},{"l":"net.kyori.adventure.text.serializer.gson.impl"}];updateSearchResults();
