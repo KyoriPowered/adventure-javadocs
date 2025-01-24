@@ -3,7 +3,6 @@ on: ["pull_request", "push"]
 
 env:
   DEST_DIR: _out
-  PYTHON_VERSION: "3.12"
 
 concurrency:
   group: "${{ github.workflow }}-${{ github.event.number || github.ref }}"
@@ -14,29 +13,26 @@ jobs:
     # Only run on PRs if the source branch is on someone else's repo
     if: "${{ github.event_name != 'pull_request' || github.repository != github.event.pull_request.head.repo.full_name }}"
     runs-on: "ubuntu-latest"
+    outputs:
+      publishing: "${{ steps.setup.outputs.publishing_branch }}"
     steps:
-      - name: "checkout repository"
-        uses: "actions/checkout@v4"
-      - name: "setup python ${{ env.PYTHON_VERSION }}"
-        uses: "actions/setup-python@v5"
-        with:
-          python-version: "${{ env.PYTHON_VERSION }}"
+      - name: "setup"
+        id: "setup"
+        uses: "KyoriPowered/.github/.github/actions/setup-python-env@trunk"
       - name: "install dependencies"
         run: |
-          pip install -U poetry
-          pushd _generator
-          poetry install
+          poetry -P _generator/ install
       - name: "generate site"
         run: |
           pushd _generator
           poetry run generate-jd ../$DEST_DIR --metadata ../metadata.yaml --jd-root ..
       - name: "publish"
-        if: "${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}"
+        if: "${{ github.event_name == 'push' && steps.setup.outputs.publishing_branch != '' }}"
         uses: "actions/upload-pages-artifact@v3"
         with:
           path: "${{ env.DEST_DIR }}"
   deploy:
-    if: "${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}"
+    if: "${{ github.event_name == 'push' && needs.build.outputs.publishing != ''}}"
     needs: "build"
     runs-on: "ubuntu-latest"
 
