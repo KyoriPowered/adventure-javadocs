@@ -19,10 +19,13 @@ jobs:
       - name: "setup"
         id: "setup"
         uses: "KyoriPowered/.github/.github/actions/setup-python-env@trunk"
+        with:
+          working_dir: "_generator/"
       - name: "install dependencies"
         run: |
           poetry -P _generator/ install
       - name: "generate site"
+        working-directory: "_generator"
         run: |
           pushd _generator
           poetry run generate-jd ../$DEST_DIR --metadata ../metadata.yaml --jd-root ..
