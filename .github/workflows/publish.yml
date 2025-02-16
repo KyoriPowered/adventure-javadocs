@@ -27,7 +27,6 @@ jobs:
       - name: "generate site"
         working-directory: "_generator"
         run: |
-          pushd _generator
           poetry run generate-jd ../$DEST_DIR --metadata ../metadata.yaml --jd-root ..
       - name: "publish"
         if: "${{ github.event_name == 'push' && steps.setup.outputs.publishing_branch != '' }}"
