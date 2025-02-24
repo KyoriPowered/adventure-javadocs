@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"net.kyori.option"},{"l":"net.kyori.option.value"}];updateSearchResults();
