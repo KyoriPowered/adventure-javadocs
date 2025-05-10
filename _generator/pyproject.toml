@@ -10,15 +10,10 @@ packages = [{include = "jdgenerator"}]
 python = "^3.10"
 Jinja2 = ">=3.0.0,<4.0.0"
 semver = ">=3.0.1,<3.1.0"
-"ruamel.yaml" = ">=0.17"
+"ruamel.yaml" = ">=0.18"
 
 [tool.poetry.scripts]
 "generate-jd" = 'jdgenerator.generate:main'
-
-[[tool.poetry.source]]
-name = "kyori"
-url = "https://repo.kyori.net/repository/pip-internal/simple/"
-priority = "primary"
 
 [build-system]
 requires = ["poetry-core"]
