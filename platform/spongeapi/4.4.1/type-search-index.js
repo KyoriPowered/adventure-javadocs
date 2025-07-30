@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes","url":"allclasses-index.html"},{"p":"net.kyori.adventure.platform.spongeapi","l":"SpongeAudiences.Builder"},{"p":"net.kyori.adventure.platform.spongeapi","l":"SpongeAudiences"},{"p":"net.kyori.adventure.text.serializer.spongeapi","l":"SpongeComponentSerializer"}]

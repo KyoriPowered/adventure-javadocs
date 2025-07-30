@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes","url":"allclasses-index.html"},{"p":"net.kyori.adventure.platform.bungeecord","l":"BungeeAudiences.Builder"},{"p":"net.kyori.adventure.platform.bungeecord","l":"BungeeAudiences"}]
