@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"net.kyori.adventure.serializer.configurate4","l":"ConfigurateComponentSerializer.Builder"},{"p":"net.kyori.adventure.serializer.configurate4","l":"ConfigurateComponentSerializer"},{"p":"net.kyori.adventure.serializer.configurate4","l":"ConfigurateDataComponentValue"}];updateSearchResults();
