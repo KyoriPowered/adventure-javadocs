@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"net.kyori.adventure.text.logger.slf4j","l":"ComponentLogger"},{"p":"net.kyori.adventure.text.logger.slf4j","l":"ComponentLoggerProvider"},{"p":"net.kyori.adventure.text.logger.slf4j","l":"ComponentLoggerProvider.LoggerHelper"}];updateSearchResults();
