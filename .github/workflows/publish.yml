@@ -18,7 +18,7 @@ jobs:
     steps:
       - name: "setup"
         id: "setup"
-        uses: "KyoriPowered/.github/.github/actions/setup-python-env@trunk"
+        uses: "KyoriPowered/ci-cookbook/actions/setup-python-env@2025.10.17"
         with:
           working_dir: "_generator/"
       - name: "install dependencies"
