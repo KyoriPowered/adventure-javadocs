@@ -18,7 +18,7 @@ jobs:
     steps:
       - name: "setup"
         id: "setup"
-        uses: "KyoriPowered/ci-cookbook/actions/setup-python-env@2025.10.17"
+        uses: "KyoriPowered/ci-cookbook/actions/setup-python-env@e77e68e0bee07333adf9ea66f8da5fa1e1363003" # 2025.10.17
         with:
           working_dir: "_generator/"
       - name: "install dependencies"
@@ -30,7 +30,7 @@ jobs:
           poetry run generate-jd ../$DEST_DIR --metadata ../metadata.yaml --jd-root ..
       - name: "publish"
         if: "${{ github.event_name == 'push' && steps.setup.outputs.publishing_branch != '' }}"
-        uses: "actions/upload-pages-artifact@v3"
+        uses: "actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa" # v3
         with:
           path: "${{ env.DEST_DIR }}"
   deploy:
@@ -48,4 +48,4 @@ jobs:
     steps:
       - name: "Deploy to GitHub pages"
         id: "deployment"
-        uses: "actions/deploy-pages@v4"
+        uses: "actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e" # v4
